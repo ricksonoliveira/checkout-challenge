@@ -50,4 +50,14 @@ defmodule Cart do
   defp write(content, path) do
     File.write!(path, content)
   end
+
+  def clear do
+    case File.rm(@cart_path) do
+      :ok ->
+        {:ok, "Cart cleared successfully!"}
+
+      _ ->
+        {:error, "Could not clear cart. Please, try again later."}
+    end
+  end
 end

@@ -1,5 +1,8 @@
 defmodule CheckoutTest do
-  use ExUnit.Case
+  @moduledoc """
+  Documentation for `CheckoutTest`.
+  """
+  use ExUnit.Case, async: true
 
   @cart_path Application.compile_env(:checkout, :cart_path)
 
