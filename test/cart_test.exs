@@ -1,5 +1,8 @@
 defmodule CartTest do
-  use ExUnit.Case
+  @moduledoc """
+  Documentation for `CartTest`.
+  """
+  use ExUnit.Case, async: true
 
   @cart_path Application.compile_env(:checkout, :cart_path)
 
@@ -26,5 +29,16 @@ defmodule CartTest do
     File.write!(@cart_path, :erlang.term_to_binary([]))
     assert File.exists?(@cart_path) == true
     assert {:ok, _cart} = Cart.read(@cart_path)
+  end
+
+  test "clear/0 clears cart and deletes file" do
+    File.write!(@cart_path, :erlang.term_to_binary([]))
+    assert File.exists?(@cart_path) == true
+    assert {:ok, "Cart cleared successfully!"} = Cart.clear()
+    assert assert File.exists?(@cart_path) == false
+  end
+
+  test "clear/0 returns error when no valid path" do
+    assert {:error, "Could not clear cart. Please, try again later."} = Cart.clear()
   end
 end

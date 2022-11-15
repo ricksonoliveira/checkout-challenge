@@ -73,7 +73,6 @@ defmodule Checkout do
 
     if length(tshirts_cart) >= product["discount_rules"]["quantity"] do
       Enum.map(tshirts_cart, &Map.put(&1, "price", product["discount_rules"]["new_price"]))
-
     else
       tshirts_cart
     end

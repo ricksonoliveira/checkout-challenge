@@ -1,5 +1,8 @@
 defmodule ProductTest do
-  use ExUnit.Case
+  @moduledoc """
+  Documentation for `ProductTest`.
+  """
+  use ExUnit.Case, async: true
 
   test "get_products/0 should return all products json" do
     assert {:ok, products} =
