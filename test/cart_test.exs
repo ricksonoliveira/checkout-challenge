@@ -2,7 +2,7 @@ defmodule CartTest do
   @moduledoc """
   Documentation for `CartTest`.
   """
-  use ExUnit.Case, async: true
+  use ExUnit.Case
 
   @cart_path Application.compile_env(:checkout, :cart_path)
 
@@ -19,13 +19,13 @@ defmodule CartTest do
     assert length(cart) > 0
   end
 
-  test "read/1 creates a file when not found", %{product: product} do
+  test "read/1 creates a file when not found" do
     assert File.exists?(@cart_path) == false
     assert {:ok, _cart} = Cart.read(@cart_path)
     assert File.exists?(@cart_path) == true
   end
 
-  test "read/1 reads a file when exists", %{product: product} do
+  test "read/1 reads a file when exists" do
     File.write!(@cart_path, :erlang.term_to_binary([]))
     assert File.exists?(@cart_path) == true
     assert {:ok, _cart} = Cart.read(@cart_path)
